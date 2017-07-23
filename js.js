@@ -2,14 +2,22 @@ window.onload=function(){
 	var timer=null;
 	var oMain=document.getElementById('main');
 	var oContainer=getByClass(oMain,'container')[0];
+	var iSpeed=1;
 	
 	timer=setInterval(function(){
 		var iTop=parseInt(getStyle(oContainer,'top'));
-		console.log(iTop);
-		oContainer.style.top=iTop+ 1 +'px';
-		console.log(iTop);
+		
 		if(iTop>=0){
+			iTop=0;
+		}else{
+			iTop+=iSpeed;
+		}
+		oContainer.style.top=iTop+'px';
+
+		if(iTop>=0){
+			createRow();
 			oContainer.style.top=-120+'px';
+			drow();
 		}
 		
 	},30);
@@ -17,6 +25,13 @@ window.onload=function(){
 	function init(){
 		for(var i=0;i<4;i++){
 			createRow();
+		}
+	}
+
+	function drow(){
+		var oContainer=getByClass(oMain,'container')[0];
+		if(oContainer.childNodes.length == 6) {
+    		oContainer.removeChild(oContainer.lastChild);
 		}
 	}
 
